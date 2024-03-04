@@ -5,56 +5,129 @@
   text-align: center;
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   color: black;
-  background-image: url('./assets/background-img.jpg');
-
-  /* Specify background image properties */
-  background-size: cover; /* Cover the entire container */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-attachment: fixed; /* Keep the background image fixed while scrolling */
 
 }
 
- body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-
-.samosa {
-  height: 20em;
-  padding: 1.5em;
-  will-change: filter;
+.card {
+  width: 400px;
+  height: 300px;
+  position: relative;
+  padding: 10px;
   transition: filter 300ms;
   margin: 0 auto;
-  text-align: center;
+  background-color: rgba(250, 250, 250, 0.1); 
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  margin: 20px;
+  perspective: 1000px;
+  margin: 0 auto; /* Centering the card */
+  cursor: pointer
 }
 
-.samosa:hover {
-  filter: drop-shadow(0 0 2em #f4f66eaa);
+.card-inner {
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+}
+
+.isFlipped {
+  transform: rotateX(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-face.back {
+  transform: rotateX(180deg);
+}
+
+
+.card img {
+  max-width:100%;
+  border-radius: 8px;
+  max-height: 100%;
+}
+
+.card h3 {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  background-color: rgba(0, 0, 0, 0.7); 
+  width: min-content;
+  margin: 0 auto;
+  padding: 20px;
+  color: rgb(197, 168, 3);
+}
+
+h2 {
+  background-color: rgba(0, 0, 0, 0.7); 
+  width: 50%;
+  margin: 10px auto;
+  padding: 10px;
+   color: rgb(197, 168, 3);
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
   cursor: pointer;
-  transform: scale(1.1);
+  transition: border-color 0.25s;
+  margin-right: 10px;
 }
 
-.samosa:active {
-  transform: scale(0.95);
+button:hover {
+  border-color: #646cff;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
   }
-  to {
-    transform: rotate(360deg);
+  a:hover {
+    color: #747bff;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  button {
+    background-color: #f9f9f9;
   }
 }
 
