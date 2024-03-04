@@ -22,6 +22,7 @@ const Card = ({ album, isFlipped, artist, onClick }) => { // Assuming artist is 
         <img src={img} alt="Artist Image" />
       </div>
       <div className={`card-face back ${isFlipped ? 'isFlipped' : ''}`}>
+        <h3>{artist || 'ARTIST'}</h3>
         <h3>{album || 'ALBUM'}</h3>
       </div>
     </div>
