@@ -29,6 +29,7 @@ async function getAccessToken() {
 async function fetchAlbumCover(artist, album) {
   try {
     const accessToken = await getAccessToken();
+
     const response = await axios.get('https://api.spotify.com/v1/search', {
       params: {
         q: `artist:${artist} album:${album}`,

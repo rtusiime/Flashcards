@@ -2,7 +2,6 @@ import './App.css';
 import Card from './components/Card'
 import { useState } from 'react';
 import albums from './utils/albums';
-console.log("I'm happy :)")
 console.log(albums);
 const N = albums.length;
 
@@ -17,7 +16,7 @@ const App = () => {
   }
 
   const moveForward = () => {
-    if (index < N) {
+    if (index < N - 1) {
       setIndex(index + 1);
     }
   }
@@ -33,7 +32,7 @@ const App = () => {
       <div>
         <h1>Album Covers</h1>
         <h2>How well do you know your music?</h2>
-        <Card isFlipped={isFlipped} onClick={flipCard} />
+        <Card isFlipped={isFlipped} onClick={flipCard} album={albums[index].album} artist={albums[index].name} />
       </div>
       <div className="buttons">
         <button onClick={moveBack}>⏮</button>
