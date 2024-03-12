@@ -58,3 +58,33 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
+
+## Part II: Enhanced Interaction and Learning
+
+### Overview
+In "Album Art Flashcards! Part II", the app evolves to include interactive elements that allow users to engage more deeply with the material. Building on the foundation laid in Part I, Part II introduces features enabling users to test their recall more actively and navigate the flashcard set more freely.
+
+### Goals
+By expanding the app, users will be able to:
+- Enter their guesses for the artist and album before flipping the card, enhancing active recall.
+- Receive immediate feedback on their guesses, fostering a more interactive learning experience.
+- Navigate through the flashcards in multiple directions, allowing for a more flexible review process.
+
+### Required Features
+#### User Input
+- Users can now type their guesses into input boxes for both the artist and the album.
+- A 'Submit' button allows users to submit their guesses and immediately see if they were correct or incorrect.
+- Correct and incorrect guesses are visually distinguished, aiding in the learning process.
+
+#### Navigation Enhancements
+- A 'Back' button enables users to return to the previous card, facilitating revision and reinforcing memory.
+- Users can continue to use the 'Next' button to progress through the flashcard set.
+- The app dynamically disables the 'Back' or 'Next' buttons when the user is at the beginning or end of the flashcard set, respectively.
+
+### Implementation Details
+- Fuzzy matching logic has been introduced to validate user inputs, allowing for minor variations in spelling or wording.
+- State management has been refined to ensure a smooth and responsive user experience.
+- The UI has been updated to accommodate new features while maintaining a clean and engaging design.
+
+By incorporating these enhancements, "Album Art Flashcards! Part II" not only improves the educational value of the app but also makes the process of exploring and learning album art more enjoyable and effective.
