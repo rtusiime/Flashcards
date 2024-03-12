@@ -87,4 +87,8 @@ By expanding the app, users will be able to:
 - State management has been refined to ensure a smooth and responsive user experience.
 - The UI has been updated to accommodate new features while maintaining a clean and engaging design.
 
-By incorporating these enhancements, "Album Art Flashcards! Part II" not only improves the educational value of the app but also makes the process of exploring and learning album art more enjoyable and effective.
+## Video Walkthrough
+
+Here's a walkthrough of the implemented features:
+
+![Video Walkthrough](flashcards-walkthrough-pt2.gif)
