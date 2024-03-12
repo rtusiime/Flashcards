@@ -68,7 +68,6 @@
   visibility: collapse;
 }
 
-
 .card img {
   max-width:100%;
   height: auto;
@@ -94,6 +93,10 @@ a:hover {
   color: #535bf2;
 }
 
+input {
+  margin: 3px;
+}
+
 h1 {
   font-family: oswald;
   background-color: rgba(255, 255, 255, 0.9); 
@@ -115,7 +118,7 @@ h2 {
   font-family: cursive;
 }
 
-.buttons {
+.nav-buttons {
   margin-top: 10px;
 }
 
@@ -139,6 +142,18 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.answer-section {
+  display: inline-flex;
+}
+
+.No {
+  background-color: rgba(248, 112, 112, 0.398);
+}
+
+.Yes {
+  background-color: rgba(112, 248, 162, 0.398);
 }
 
 @media (prefers-color-scheme: light) {
