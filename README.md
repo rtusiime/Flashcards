@@ -42,6 +42,34 @@ Here's a walkthrough of the implemented features:
 - Flipping the card was surprisingly complex.
 - Learning to hook up the Spotify API was probably a bit overkill for this...
 
+
+## Part II: Enhanced Interaction and Learning
+
+### Overview
+In "Album Art Flashcards! Part II", the app evolves to include interactive elements that allow users to engage more deeply with the material. Building on the foundation laid in Part I, Part II introduces features enabling users to test their recall more actively and navigate the flashcard set more freely.
+
+#### Required Features
+- [x] Users can now type their guesses into input boxes for both the artist and the album.
+- [x] Users CANNOT flip cards without at least guessing either artist or album. 
+- [x] A 'Submit' button allows users to submit their guesses and immediately see if they were correct or incorrect.
+- [x] Correct and incorrect guesses are visually distinguished.
+- [x] Users can navogate through ordered list of cards. 
+
+#### Extra
+- [x] The app dynamically disables the 'Back' or 'Next' buttons when the user is at the beginning or end of the flashcard set, respectively.
+- [x] Fuzzy matching logic has been introduced to validate user inputs, allowing for minor variations in spelling or wording.
+- [x] The UI has been updated to accommodate new features while maintaining a clean and engaging design.
+- [ ] Shuffle button to reorder the the flashcard list.
+- [ ] Counter to display longest streak
+- [ ] User can mark card they mastered.
+
+## Video Walkthrough
+
+Here's a walkthrough of the implemented features:
+
+![Video Walkthrough](flashcards-walkthrough-pt2.gif)
+
+
 ## License
 
 ```
@@ -59,36 +87,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-## Part II: Enhanced Interaction and Learning
-
-### Overview
-In "Album Art Flashcards! Part II", the app evolves to include interactive elements that allow users to engage more deeply with the material. Building on the foundation laid in Part I, Part II introduces features enabling users to test their recall more actively and navigate the flashcard set more freely.
-
-### Goals
-By expanding the app, users will be able to:
-- Enter their guesses for the artist and album before flipping the card, enhancing active recall.
-- Receive immediate feedback on their guesses, fostering a more interactive learning experience.
-- Navigate through the flashcards in multiple directions, allowing for a more flexible review process.
-
-### Required Features
-#### User Input
-- Users can now type their guesses into input boxes for both the artist and the album.
-- A 'Submit' button allows users to submit their guesses and immediately see if they were correct or incorrect.
-- Correct and incorrect guesses are visually distinguished, aiding in the learning process.
-
-#### Navigation Enhancements
-- A 'Back' button enables users to return to the previous card, facilitating revision and reinforcing memory.
-- Users can continue to use the 'Next' button to progress through the flashcard set.
-- The app dynamically disables the 'Back' or 'Next' buttons when the user is at the beginning or end of the flashcard set, respectively.
-
-### Implementation Details
-- Fuzzy matching logic has been introduced to validate user inputs, allowing for minor variations in spelling or wording.
-- State management has been refined to ensure a smooth and responsive user experience.
-- The UI has been updated to accommodate new features while maintaining a clean and engaging design.
-
-## Video Walkthrough
-
-Here's a walkthrough of the implemented features:
-
-![Video Walkthrough](flashcards-walkthrough-pt2.gif)
