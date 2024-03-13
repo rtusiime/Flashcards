@@ -59,10 +59,10 @@ In "Album Art Flashcards! Part II", the app evolves to include interactive eleme
 - [x] User can also submit using 'Enter' key.
 - [x] The app dynamically disables the 'Back' or 'Next' buttons when the user is at the beginning or end of the flashcard set, respectively.
 - [x] Fuzzy matching logic has been introduced to validate user inputs, allowing for minor variations in spelling or wording.
-- [x] The UI has been updated to accommodate new features while maintaining a clean and engaging design.
 - [ ] Shuffle button to reorder the the flashcard list.
-- [ ] Counter to display longest streak
+- [x] Counter to display longest streak
 - [ ] User can mark card they mastered.
+- [ ] Different difficulty level based on Strictness of fuzzy matching. Strict: *exact* input is required. | Lenient: partial matches are considered correct
 
 ## Video Walkthrough
 
