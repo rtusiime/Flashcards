@@ -1,93 +1,100 @@
 import './App.css';
-import Card from './components/Card'
+import Card from './components/Card';
 import { useState, useEffect } from 'react';
 import albums from './utils/albums';
 
 const App = () => {
-  const [hasGuessed, setHasGuessed] = useState(false);
-  const [isFlipped, setFlippedState] = useState(false);
   const [index, setIndex] = useState(0);
   const [artistGuess, setArtistGuess] = useState('');
   const [albumGuess, setAlbumGuess] = useState('');
-
-  // Derived states are calculated directly from the primary state 'index'
-  const currentAlbum = albums[index].album;
-  const currentArtist = albums[index].name;
-  const [canGoBack, setCanGoBack] = useState(false);
-  const [canGoForward, setCanGoForward] = useState(index < albums.length - 1);
-
-  const [isAlbumGuessCorrect, setIsAlbumGuessCorrect] = useState('');
+  const [currentScore, setCurrentScore] = useState(0);
+  const [highScore, setHighScore] = useState(localStorage.getItem('highScore') || 0);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [hasGuessed, setHasGuessed] = useState(false);
   const [isArtistGuessCorrect, setIsArtistGuessCorrect] = useState('');
+  const [isAlbumGuessCorrect, setIsAlbumGuessCorrect] = useState('');
+  const [correctlyGuessedIndices, setCorrectlyGuessedIndices] = useState([]);
+
+  const { album: currentAlbum, name: currentArtist } = albums[index];
 
   useEffect(() => {
-    // Ensures 'canGoBack' and 'canGoForward' are updated whenever 'index' changes.
-    setCanGoBack(index > 0);
-    setCanGoForward(index < albums.length - 1);
-
-    // Resets guess flag and text fields upon navigating.
     setHasGuessed(false);
     setIsAlbumGuessCorrect('');
     setIsArtistGuessCorrect('');
-    // Resets guess input fields.
     setAlbumGuess('');
     setArtistGuess('');
+    localStorage.setItem('highScore', highScore);
+  }, [index, highScore]);
 
-  }, [index]);
+  const moveIndex = (delta) => {
+    setIndex((prevIndex) => {
+      const newIndex = Math.min(Math.max(prevIndex + delta, 0), albums.length - 1);
+      return newIndex;
+    });
+  };
 
-  const moveBack = () => {
-    setIndex(idx => Math.max(idx - 1, 0));
-  }
+  const normalizeString = (str) => {
+    return str.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim();
+  };
 
-  const moveForward = () => {
-    setIndex(idx => Math.min(idx + 1, albums.length - 1));
-  }
+  const containsKeywords = (userInput, correctAnswer) => {
+    const userTokens = normalizeString(userInput).split(' ');
+    const answerTokens = normalizeString(correctAnswer).split(' ');
+    return userTokens.every((token) => answerTokens.includes(token));
+  };
 
-  const flipCard = () => {
-    if (hasGuessed) {
-      setFlippedState(flipped => !flipped);
-    } else {
-      alert('Please enter your best guess before flipping the card. Otherwise, request a hint');
-    }
-  }
+  const updateScoreAndHighScore = (correct) => {
+    const newScore = currentScore + 1;
+    setCurrentScore(newScore);
+    setHighScore(Math.max(newScore, highScore));
+    setCorrectlyGuessedIndices((prev) => [...new Set([...prev, index])]);
+  };
 
   const checkAnswer = () => {
+    if (hasGuessed && correctlyGuessedIndices.includes(index)) return;
+
     setHasGuessed(true);
-    setIsAlbumGuessCorrect(currentAlbum === albumGuess ? 'Yes' : 'No');
-    setIsArtistGuessCorrect(currentArtist === artistGuess ? 'Yes' : 'No');
-  }
+    const artistResult = normalizeString(artistGuess) === normalizeString(currentArtist) || containsKeywords(artistGuess, currentArtist) ? 'Yes' : 'No';
+    const albumResult = normalizeString(albumGuess) === normalizeString(currentAlbum) || containsKeywords(albumGuess, currentAlbum) ? 'Yes' : 'No';
+
+    setIsArtistGuessCorrect(artistResult);
+    setIsAlbumGuessCorrect(albumResult);
+
+    if ((artistResult === 'Yes' || albumResult === 'Yes') && !correctlyGuessedIndices.includes(index)) {
+      updateScoreAndHighScore(true);
+    } else if (!correctlyGuessedIndices.includes(index)) {
+      setCurrentScore(0);
+    }
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      checkAnswer();
+    }
+  };
 
   return (
     <div className='App'>
+      <h1>Album Covers</h1>
+      <h2>How well do you know your music?</h2>
+      <h3>Streak: {currentScore} </h3> <h3>High score: {highScore}</h3>
+
+      <Card isFlipped={isFlipped} onClick={() => !hasGuessed ? alert('Please enter your guess!') : setIsFlipped(f => !f)} album={currentAlbum} artist={currentArtist} />
+
       <div>
-        <h1>Album Covers</h1>
-        <h2>How well do you know your music?</h2>
-        <h3>Streak: </h3> <h3>High score:</h3>
-
-        <Card isFlipped={isFlipped} onClick={flipCard} album={currentAlbum} artist={currentArtist} />
-
-        <div>
-          <input className={isArtistGuessCorrect} type="text" id="guess-artist-textbox"
-            placeholder={'Guess the artist'} value={artistGuess}
-            onChange={(e) => setArtistGuess(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') { checkAnswer() } }}
-          />
-          <br />
-          <input className={isAlbumGuessCorrect} type="text" id="guess-album-textbox"
-            placeholder={'Guess the album'} value={albumGuess}
-            onChange={(e) => setAlbumGuess(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') { checkAnswer() } }}
-          />
-        </div>
-        <button onClick={checkAnswer}>Answer</button>
+        <input className={isArtistGuessCorrect} type="text" id="guess-artist-textbox" placeholder={'Guess the artist'} value={artistGuess} onChange={(e) => setArtistGuess(e.target.value)} onKeyDown={handleKeyDown} />
       </div>
+      <div>
+        <input className={isAlbumGuessCorrect} type="text" id="guess-album-textbox" placeholder={'Guess the album'} value={albumGuess} onChange={(e) => setAlbumGuess(e.target.value)} onKeyDown={handleKeyDown} />
+      </div>
+      <button onClick={checkAnswer}>Answer</button>
 
       <div className="nav-buttons">
-        <button disabled={!canGoBack} onClick={moveBack}>⏮</button>
-        <button disabled={!canGoForward} onClick={moveForward}>⏭</button>
+        <button disabled={!index} onClick={() => moveIndex(-1)}>⏮</button>
+        <button disabled={index === albums.length - 1} onClick={() => moveIndex(1)}>⏭</button>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
 export default App;
